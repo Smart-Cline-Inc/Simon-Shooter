@@ -1,5 +1,6 @@
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 var frequency = 0
+
 function getTone(tone) {
   if (tone == (-500)) {
     frequency = 100
