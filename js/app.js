@@ -19,19 +19,19 @@ light2.position.y = 50;
 light2.position.z = 1000;
 scene.add(light2)
 
-const circle1 = new THREE.SphereGeometry(75, 100, 100);
-const circle2 = new THREE.SphereGeometry(75, 100, 100);
-const circle3 = new THREE.SphereGeometry(75, 100, 100);
-const circle4 = new THREE.SphereGeometry(75, 100, 100);
+const sphere1 = new THREE.SphereGeometry(75, 100, 100);
+const sphere2 = new THREE.SphereGeometry(75, 100, 100);
+const sphere3 = new THREE.SphereGeometry(75, 100, 100);
+const sphere4 = new THREE.SphereGeometry(75, 100, 100);
 
 const material1 = new THREE.MeshLambertMaterial({color: 0x00FF00});
 const material2 = new THREE.MeshLambertMaterial({color: 0x0000FF});
 const material3 = new THREE.MeshLambertMaterial({color: 0xFF0000});
 const material4 = new THREE.MeshLambertMaterial({color: 0xFFFF00});
-const mesh1 = new THREE.Mesh(circle1, material1);
-const mesh2 = new THREE.Mesh(circle2, material2);
-const mesh3 = new THREE.Mesh(circle3, material3);
-const mesh4 = new THREE.Mesh(circle4, material4);
+const mesh1 = new THREE.Mesh(sphere1, material1);
+const mesh2 = new THREE.Mesh(sphere2, material2);
+const mesh3 = new THREE.Mesh(sphere3, material3);
+const mesh4 = new THREE.Mesh(sphere4, material4);
 
 mesh1.position.x = -500;
 mesh1.position.y = 50;
