@@ -19,6 +19,8 @@ light2.position.y = 50;
 light2.position.z = 1000;
 scene.add(light2)
 
+let objects = [];
+
 const sphere1 = new THREE.SphereGeometry(75, 100, 100);
 const sphere2 = new THREE.SphereGeometry(75, 100, 100);
 const sphere3 = new THREE.SphereGeometry(75, 100, 100);
@@ -66,16 +68,41 @@ scene.add(mesh3);
 scene.add(mesh4);
 scene.add(mesh5);
 
+objects.push(mesh1);
+objects.push(mesh2);
+objects.push(mesh3);
+objects.push(mesh4);
+
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
 function onMouseMove( event ) {
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-  // console.log(mouse.x*500);
-  mesh5.rotation.z = -mouse.x*1.2;
+  mesh5.rotation.z = -mouse.x*1.3;
 }
-window.addEventListener( 'mousemove', onMouseMove, false );
+
+function onDocumentMouseDown( event ) {
+
+	event.preventDefault();
+
+	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+	raycaster.setFromCamera( mouse, camera );
+
+	var intersects = raycaster.intersectObjects( objects );
+	console.log(intersects[0].object.position.x);
+
+	if ( intersects.length > 0 ) {
+
+		intersects[ 0 ].object.material.color.setHex(0xffffff);
+
+	}
+}
+
+document.addEventListener( 'mousemove', onMouseMove, false );
+document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 
 requestAnimationFrame(render);
 
