@@ -92,11 +92,14 @@ function onDocumentMouseDown( event ) {
 	raycaster.setFromCamera( mouse, camera );
 
 	var intersects = raycaster.intersectObjects( objects );
-	console.log(intersects[0].object.position.x);
+	let tone = intersects[0].object.position.x
+
 
 	if ( intersects.length > 0 ) {
 
 		intersects[ 0 ].object.material.color.setHex(0xffffff);
+		// console.log(tone);
+		getTone(tone)
 
 	}
 }
