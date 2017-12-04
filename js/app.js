@@ -7,22 +7,31 @@ const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerH
 
 const scene = new THREE.Scene();
 
-const light = new THREE.AmbientLight(0xffffff, 0.5);
+const light = new THREE.AmbientLight(0xaaffff, 0.5);
+light.position.x = -500;
+light.position.y = 50;
+light.position.z = 1000;
 scene.add(light)
 
-const light2 = new THREE.PointLight(0xffffff, 0.5);
+const light2 = new THREE.PointLight(0xffaaff, 0.5);
+light2.position.x = 500;
+light2.position.y = 50;
+light2.position.z = 1000;
 scene.add(light2)
 
-const circle1 = new THREE.CircleGeometry(75, 100);
-const circle2 = new THREE.CircleGeometry(75, 100);
-const circle3 = new THREE.CircleGeometry(75, 100);
-const circle4 = new THREE.CircleGeometry(75, 100);
+const circle1 = new THREE.SphereGeometry(75, 100, 100);
+const circle2 = new THREE.SphereGeometry(75, 100, 100);
+const circle3 = new THREE.SphereGeometry(75, 100, 100);
+const circle4 = new THREE.SphereGeometry(75, 100, 100);
 
-const material = new THREE.MeshLambertMaterial({color: 0xF3FFE2});
-const mesh1 = new THREE.Mesh(circle1, material);
-const mesh2 = new THREE.Mesh(circle2, material);
-const mesh3 = new THREE.Mesh(circle3, material);
-const mesh4 = new THREE.Mesh(circle4, material);
+const material1 = new THREE.MeshLambertMaterial({color: 0x00FF00});
+const material2 = new THREE.MeshLambertMaterial({color: 0x0000FF});
+const material3 = new THREE.MeshLambertMaterial({color: 0xFF0000});
+const material4 = new THREE.MeshLambertMaterial({color: 0xFFFF00});
+const mesh1 = new THREE.Mesh(circle1, material1);
+const mesh2 = new THREE.Mesh(circle2, material2);
+const mesh3 = new THREE.Mesh(circle3, material3);
+const mesh4 = new THREE.Mesh(circle4, material4);
 
 mesh1.position.x = -500;
 mesh1.position.y = 50;
