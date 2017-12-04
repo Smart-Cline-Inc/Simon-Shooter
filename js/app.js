@@ -76,13 +76,16 @@ objects.push(mesh4);
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
-function onMouseMove( event ) {
+function onMouseMove(event) {
+
+	event.preventDefault();
+
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-  mesh5.rotation.z = -mouse.x*1.3;
+  mesh5.rotation.z = -mouse.x * 1.3;
 }
 
-function onMouseDown( event ) {
+function onMouseDown(event) {
 
 	event.preventDefault();
 
@@ -95,17 +98,43 @@ function onMouseDown( event ) {
 	let tone = intersects[0].object.position.x
 
 
-	if ( intersects.length > 0 ) {
+	if (intersects.length > 0) {
 
-		intersects[ 0 ].object.material.color.setHex(0xffffff);
-		// console.log(tone);
+		intersects[0].object.material.color.setHex(0xffffff);
 		getTone(tone)
 
 	}
 }
 
+function onMouseUp(event) {
+
+	event.preventDefault();
+
+	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+	raycaster.setFromCamera( mouse, camera );
+
+	var intersects = raycaster.intersectObjects( objects );
+	let selected = intersects[0].object.position.x
+
+
+	if (intersects.length > 0) {
+		if (selected === -500) {
+			intersects[0].object.material.color.setHex(0x00FF00);
+		} else if (selected === -175) {
+			intersects[0].object.material.color.setHex(0x0000FF);
+		} else if (selected === 175) {
+			intersects[0].object.material.color.setHex(0xFF0000);
+		} else if (selected === 500) {
+			intersects[0].object.material.color.setHex(0xFFFF00);
+		}
+	}
+}
+
 document.addEventListener( 'mousemove', onMouseMove, false );
 document.addEventListener( 'mousedown', onMouseDown, false );
+document.addEventListener( 'mouseup', onMouseUp, false);
 
 requestAnimationFrame(render);
 
