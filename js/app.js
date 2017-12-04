@@ -82,7 +82,7 @@ function onMouseMove( event ) {
   mesh5.rotation.z = -mouse.x*1.3;
 }
 
-function onDocumentMouseDown( event ) {
+function onMouseDown( event ) {
 
 	event.preventDefault();
 
@@ -105,7 +105,7 @@ function onDocumentMouseDown( event ) {
 }
 
 document.addEventListener( 'mousemove', onMouseMove, false );
-document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+document.addEventListener( 'mousedown', onMouseDown, false );
 
 requestAnimationFrame(render);
 
