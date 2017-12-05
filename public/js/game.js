@@ -6,8 +6,8 @@ function pickRandomSphere() {
 
 function lightUpSphere() {
   pickRandomSphere()
-  for (i=0; i<arr.length; i++) {
-    setTimeout(chooseSphere, i * 1000, i)  
+  for (i=0; i < arr.length; i++) {
+    setTimeout(chooseSphere, i * 1000, i)
   }
 }
 

@@ -14,13 +14,13 @@ const light = new THREE.AmbientLight(0xaaffff, 0.5);
 light.position.x = -500;
 light.position.y = 50;
 light.position.z = 1000;
-scene.add(light)
+scene.add(light);
 
 const light2 = new THREE.PointLight(0xffaaff, 0.5);
 light2.position.x = 500;
 light2.position.y = 50;
 light2.position.z = 1000;
-scene.add(light2)
+scene.add(light2);
 
 let objects = [];
 
@@ -28,7 +28,7 @@ const sphere1 = new THREE.SphereGeometry(75, 100, 100);
 const sphere2 = new THREE.SphereGeometry(75, 100, 100);
 const sphere3 = new THREE.SphereGeometry(75, 100, 100);
 const sphere4 = new THREE.SphereGeometry(75, 100, 100);
-const shooter = new THREE.ConeGeometry(20, 100, 3)
+const shooter = new THREE.ConeGeometry(20, 100, 3);
 const shot = new THREE.TetrahedronGeometry(6, 0);
 
 const material1 = new THREE.MeshLambertMaterial({color: 0x00FF00});
@@ -83,75 +83,95 @@ objects.push(mesh2);
 objects.push(mesh3);
 objects.push(mesh4);
 
-var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2();
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+let playerChoiceArr = [];
 
 function onSpacePress(event) {
-	event.preventDefault()
+	event.preventDefault();
 	if (event.code == 'Space') {
-		document.addEventListener( 'mousemove', onMouseMove, false );
-		document.addEventListener( 'mousedown', onMouseDown, false );
-		lightUpSphere()
-		body.removeChild(startText)
+		document.addEventListener('mousemove', onMouseMove, false);
+		document.addEventListener('mousedown', onMouseDown, false);
+		body.removeChild(startText);
+		lightUpSphere();
 		// document.removeEventListener('keyup', onSpacePress)
-	}
-}
+	};
+};
 
 function onMouseMove(event) {
 	event.preventDefault();
 
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   mesh5.rotation.z = -mouse.x * 1.5;
-}
+};
 
 function onMouseDown(event) {
 	event.preventDefault();
 
-	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+	mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+	mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
 
-	raycaster.setFromCamera( mouse, camera );
+	raycaster.setFromCamera(mouse, camera);
 
-	var intersects = raycaster.intersectObjects( objects );
-	let tone = intersects[0].object.position.x
-	console.log(intersects[0].object.material.color);
+	var intersects = raycaster.intersectObjects(objects);
 
 	if (intersects.length > 0) {
+		let spherePosition = intersects[0].object.position.x;
+		addSphereToArray(spherePosition);
+		// console.log(playerChoiceArr);
 		intersects[0].object.material.color.setHex(0xffffff);
-		setTimeout(getTone, 275, tone)
-		setTimeout(impact, 275)
-		setTimeout(revertBack, 500)
-		shoot(intersects)
-		shotSound()
-	}
-}
+		setTimeout(getTone, 275, spherePosition);
+		setTimeout(impact, 275);
+		setTimeout(revertBack, 300);
+		shoot(intersects);
+		shotSound();
+	};
+};
+
+function addSphereToArray(spherePos) {
+	switch (spherePos) {
+		case -500:
+			playerChoiceArr.push(1);
+			break;
+		case -175:
+			playerChoiceArr.push(2);
+			break;
+		case 175:
+			playerChoiceArr.push(3);
+			break;
+		case 500:
+			playerChoiceArr.push(4);
+			break;
+	};
+};
 
 function shoot(intersects) {
 	scene.add(mesh6);
-	let posX = intersects["0"].point.x
-	let posY = intersects["0"].point.y
-	let posZ = intersects["0"].point.z
-	let frames = requestAnimationFrame(render)
-	let arrX = []
-	let arrY = []
-	let arrZ = []
-	let position = { x: 0, y: -75, z: -500}
-	let target = { x: posX, y: posY, z: posZ }
+	let posX = intersects["0"].point.x;
+	let posY = intersects["0"].point.y;
+	let posZ = intersects["0"].point.z;
+	let frames = requestAnimationFrame(render);
+	let arrX = [];
+	let arrY = [];
+	let arrZ = [];
+	let position = {x: 0, y: -75, z: -500};
+	let target = {x: posX, y: posY, z: posZ};
 	var tween = new TWEEN.Tween(mesh6.position)
 		.to(target, 150)
 		.start()
-	animate()
-}
+	animate();
+};
 
 function animate() {
-	requestAnimationFrame(animate)
-	TWEEN.update()
-	renderer.render(scene, camera)
-	mesh6.position.x = 0
-	mesh6.position.y = -75
-	mesh6.position.z = -500
-}
+	requestAnimationFrame(animate);
+	TWEEN.update();
+	renderer.render(scene, camera);
+	mesh6.position.x = 0;
+	mesh6.position.y = -75;
+	mesh6.position.z = -500;
+};
 
 document.addEventListener('keyup', onSpacePress, false);
 
