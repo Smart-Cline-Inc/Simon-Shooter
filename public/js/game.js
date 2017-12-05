@@ -2,6 +2,7 @@ let arr = [];
 
 function pickRandomSphere() {
   arr.push(Math.floor(Math.random() * 4 + 1))
+  playerChoiceArr = []
 }
 
 function lightUpSphere() {

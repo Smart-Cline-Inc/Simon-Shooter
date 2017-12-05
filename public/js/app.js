@@ -127,6 +127,7 @@ function onMouseDown(event) {
 		setTimeout(revertBack, 300);
 		shoot(intersects);
 		shotSound();
+		compareArrays();
 	};
 };
 
@@ -145,6 +146,11 @@ function addSphereToArray(spherePos) {
 			playerChoiceArr.push(4);
 			break;
 	};
+};
+
+function compareArrays() {
+	console.log('player array: ' + playerChoiceArr);
+	console.log('random array: ' + arr);
 };
 
 function shoot(intersects) {
