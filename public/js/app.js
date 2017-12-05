@@ -93,7 +93,7 @@ function onSpacePress(event) {
 	if (event.code == 'Space') {
 		document.addEventListener('mousemove', onMouseMove, false);
 		document.addEventListener('mousedown', onMouseDown, false);
-		body.removeChild(startText);
+		// body.removeChild(startText);
 		lightUpSphere();
 		// document.removeEventListener('keyup', onSpacePress)
 	};
