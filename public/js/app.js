@@ -1,9 +1,9 @@
 const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('gameDisplay'), antialias: true});
 renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(window.innerWidth, window.innerWidth/(16/12));
 
-const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 3000);
 
 const scene = new THREE.Scene();
 
@@ -82,7 +82,7 @@ function onMouseMove(event) {
 
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-  mesh5.rotation.z = -mouse.x * 1.3;
+  mesh5.rotation.z = -mouse.x * 1.4;
 }
 
 function onMouseDown(event) {
@@ -135,6 +135,13 @@ function onMouseUp(event) {
 document.addEventListener( 'mousemove', onMouseMove, false );
 document.addEventListener( 'mousedown', onMouseDown, false );
 document.addEventListener( 'mouseup', onMouseUp, false);
+window.addEventListener('resize', function() {
+let width = window.innerWidth
+let height = window.innerWidth/(16/9)
+console.log(width);
+console.log(height);
+renderer.setSize(width, height)
+})
 
 requestAnimationFrame(render);
 
