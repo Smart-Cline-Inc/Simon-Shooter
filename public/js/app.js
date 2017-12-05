@@ -1,3 +1,5 @@
+const startText = document.querySelector('p')
+
 const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('gameDisplay'), antialias: true});
 renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -32,6 +34,7 @@ const material2 = new THREE.MeshLambertMaterial({color: 0x0000FF});
 const material3 = new THREE.MeshLambertMaterial({color: 0xFF0000});
 const material4 = new THREE.MeshLambertMaterial({color: 0xFFFF00});
 const material5 = new THREE.MeshLambertMaterial({color: 0xFF00FF});
+
 const mesh1 = new THREE.Mesh(sphere1, material1);
 const mesh2 = new THREE.Mesh(sphere2, material2);
 const mesh3 = new THREE.Mesh(sphere3, material3);
@@ -76,8 +79,14 @@ objects.push(mesh4);
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
-function onMouseMove(event) {
+function onSpacePress(event) {
+	event.preventDefault()
+	if (event.code == 'Space') {
+		lightUpSphere()
+	}
+}
 
+function onMouseMove(event) {
 	event.preventDefault();
 
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -86,7 +95,6 @@ function onMouseMove(event) {
 }
 
 function onMouseDown(event) {
-
 	event.preventDefault();
 
 	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
@@ -96,13 +104,11 @@ function onMouseDown(event) {
 
 	var intersects = raycaster.intersectObjects( objects );
 	let tone = intersects[0].object.position.x
-
+	console.log(intersects[0].object.material.color);
 
 	if (intersects.length > 0) {
-
 		intersects[0].object.material.color.setHex(0xffffff);
 		getTone(tone)
-
 	}
 }
 
@@ -118,7 +124,6 @@ function onMouseUp(event) {
 	var intersects = raycaster.intersectObjects( objects );
 	let selected = intersects[0].object.position.x
 
-
 	if (intersects.length > 0) {
 		if (selected === -500) {
 			intersects[0].object.material.color.setHex(0x00FF00);
@@ -132,6 +137,7 @@ function onMouseUp(event) {
 	}
 }
 
+document.addEventListener( 'keyup', onSpacePress, false);
 document.addEventListener( 'mousemove', onMouseMove, false );
 document.addEventListener( 'mousedown', onMouseDown, false );
 document.addEventListener( 'mouseup', onMouseUp, false);

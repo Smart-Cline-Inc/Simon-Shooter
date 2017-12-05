@@ -7,3 +7,11 @@ canvas {
   width: 100%;
   background: black;
 }
+
+p {
+  position: absolute;
+  top: 230px;
+  left: 450px;
+  color: white;
+  font-size: 3em;
+}
