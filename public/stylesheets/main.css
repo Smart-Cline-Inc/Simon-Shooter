@@ -1,21 +1,9 @@
 body {
-  width: 50%;
+  width: 100%;
   overflow: hidden;
 }
 
 canvas {
-  width: 80%;
-  height: 45%;
+  width: 100%;
   background: black;
-}
-
-.tone {
-  width: 1000px;
-  height: 1000px;
-}
-
-#green {
-  position: absolute;
-  top: 1000px;
-  left: 0;
 }
