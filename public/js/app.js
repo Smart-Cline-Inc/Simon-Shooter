@@ -108,7 +108,7 @@ function onMouseDown(event) {
 
 	if (intersects.length > 0) {
 		intersects[0].object.material.color.setHex(0xffffff);
-		getTone(tone)
+		setTimeout(getTone, 275, tone)
 	}
 }
 
