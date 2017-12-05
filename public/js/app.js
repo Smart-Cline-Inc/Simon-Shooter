@@ -28,18 +28,21 @@ const sphere2 = new THREE.SphereGeometry(75, 100, 100);
 const sphere3 = new THREE.SphereGeometry(75, 100, 100);
 const sphere4 = new THREE.SphereGeometry(75, 100, 100);
 const shooter = new THREE.ConeGeometry(20, 100, 3)
+const shot = new THREE.TetrahedronGeometry(6, 0);
 
 const material1 = new THREE.MeshLambertMaterial({color: 0x00FF00});
 const material2 = new THREE.MeshLambertMaterial({color: 0x0000FF});
 const material3 = new THREE.MeshLambertMaterial({color: 0xFF0000});
 const material4 = new THREE.MeshLambertMaterial({color: 0xFFFF00});
 const material5 = new THREE.MeshLambertMaterial({color: 0xFF00FF});
+const material6 = new THREE.MeshLambertMaterial({color: 0xFFEEDD});
 
 const mesh1 = new THREE.Mesh(sphere1, material1);
 const mesh2 = new THREE.Mesh(sphere2, material2);
 const mesh3 = new THREE.Mesh(sphere3, material3);
 const mesh4 = new THREE.Mesh(sphere4, material4);
 const mesh5 = new THREE.Mesh(shooter, material5);
+const mesh6 = new THREE.Mesh(shot, material6);
 
 mesh1.position.x = -500;
 mesh1.position.y = 50;
@@ -60,10 +63,13 @@ mesh4.position.z = -1000;
 mesh5.position.x = 0;
 mesh5.position.y = -75;
 mesh5.position.z = -500;
-
 mesh5.rotation.x = 75;
 mesh5.rotation.y = 0;
 mesh5.rotation.z = 0;
+
+mesh6.position.x = 0;
+mesh6.position.y = -75;
+mesh6.position.z = -500;
 
 scene.add(mesh1);
 scene.add(mesh2);
@@ -109,6 +115,8 @@ function onMouseDown(event) {
 	if (intersects.length > 0) {
 		intersects[0].object.material.color.setHex(0xffffff);
 		setTimeout(getTone, 275, tone)
+		setTimeout(impact, 275)
+		shotSound()
 	}
 }
 
@@ -138,12 +146,6 @@ function onMouseUp(event) {
 	shoot(intersects)
 }
 
-const shot = new THREE.TetrahedronGeometry(6, 0);
-const material6 = new THREE.MeshLambertMaterial({color: 0xFFEEDD});
-const mesh6 = new THREE.Mesh(shot, material6);
-mesh6.position.x = 0;
-mesh6.position.y = -75;
-mesh6.position.z = -500;
 function shoot(intersects) {
 	scene.add(mesh6);
 	let posX = intersects["0"].point.x
