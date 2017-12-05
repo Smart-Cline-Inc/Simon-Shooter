@@ -1,4 +1,5 @@
-const startText = document.querySelector('p')
+const startText = document.querySelector('div');
+const body = document.querySelector('body');
 
 const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('gameDisplay'), antialias: true});
 renderer.setClearColor(0x000000);
@@ -88,7 +89,11 @@ var mouse = new THREE.Vector2();
 function onSpacePress(event) {
 	event.preventDefault()
 	if (event.code == 'Space') {
+		document.addEventListener( 'mousemove', onMouseMove, false );
+		document.addEventListener( 'mousedown', onMouseDown, false );
 		lightUpSphere()
+		body.removeChild(startText)
+		// document.removeEventListener('keyup', onSpacePress)
 	}
 }
 
@@ -116,34 +121,10 @@ function onMouseDown(event) {
 		intersects[0].object.material.color.setHex(0xffffff);
 		setTimeout(getTone, 275, tone)
 		setTimeout(impact, 275)
+		setTimeout(revertBack, 500)
+		shoot(intersects)
 		shotSound()
 	}
-}
-
-function onMouseUp(event) {
-
-	event.preventDefault();
-
-	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-
-	raycaster.setFromCamera( mouse, camera );
-
-	var intersects = raycaster.intersectObjects( objects );
-	let selected = intersects[0].object.position.x
-
-	if (intersects.length > 0) {
-		if (selected === -500) {
-			intersects[0].object.material.color.setHex(0x00FF00);
-		} else if (selected === -175) {
-			intersects[0].object.material.color.setHex(0x0000FF);
-		} else if (selected === 175) {
-			intersects[0].object.material.color.setHex(0xFF0000);
-		} else if (selected === 500) {
-			intersects[0].object.material.color.setHex(0xFFFF00);
-		}
-	}
-	shoot(intersects)
 }
 
 function shoot(intersects) {
@@ -172,10 +153,7 @@ function animate() {
 	mesh6.position.z = -500
 }
 
-document.addEventListener( 'keyup', onSpacePress, false);
-document.addEventListener( 'mousemove', onMouseMove, false );
-document.addEventListener( 'mousedown', onMouseDown, false );
-document.addEventListener( 'mouseup', onMouseUp, false);
+document.addEventListener('keyup', onSpacePress, false);
 
 requestAnimationFrame(render);
 
