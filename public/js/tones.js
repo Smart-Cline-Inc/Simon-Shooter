@@ -65,14 +65,14 @@ function impact() {
   for (var i = 0; i < 10; i++) {
     let time = audioCtx.currentTime
     let gainNode = audioCtx.createGain()
-    gainNode.gain.value = 0.8
+    gainNode.gain.value = 0.5
     gainNode.connect(audioCtx.destination)
     let oscillator = audioCtx.createOscillator()
     oscillator.connect(gainNode)
     oscillator.type = "sawtooth"
     oscillator.attackTime = 0.01
     oscillator.releaseTime = 0.39
-    oscillator.frequency.value = 50 + i*2
+    oscillator.frequency.value = 50
     oscillator.start()
     gainNode.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
     oscillator.stop(time + 0.15)
