@@ -8,10 +8,11 @@ canvas {
   background: black;
 }
 
-p {
+div {
   position: absolute;
-  top: 230px;
-  left: 450px;
+  top: 260px;
+  width: 100%;
+  text-align: center;
   color: white;
   font-size: 3em;
 }

@@ -1,16 +1,24 @@
+let arr = [];
+
 function pickRandomSphere() {
-  return Math.floor(Math.random() * 4 + 1)
+  arr.push(Math.floor(Math.random() * 4 + 1))
 }
 
 function lightUpSphere() {
-  let randomSphere = pickRandomSphere()
-  if (randomSphere === 1) {
+  pickRandomSphere()
+  for (i=0; i<arr.length; i++) {
+    setTimeout(chooseSphere, i * 1000, i)  
+  }
+}
+
+function chooseSphere(i) {
+  if (arr[i] === 1) {
     material1.color.setHex(0xFFFFFF);
-  } else if (randomSphere === 2) {
+  } else if (arr[i] === 2) {
     material2.color.setHex(0xFFFFFF);
-  } else if (randomSphere === 3) {
+  } else if (arr[i] === 3) {
     material3.color.setHex(0xFFFFFF);
-  } else if (randomSphere === 4) {
+  } else if (arr[i] === 4) {
     material4.color.setHex(0xFFFFFF);
   }
   setTimeout(revertBack, 800)
