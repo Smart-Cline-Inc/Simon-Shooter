@@ -135,6 +135,39 @@ function onMouseUp(event) {
 			intersects[0].object.material.color.setHex(0xFFFF00);
 		}
 	}
+	shoot(intersects)
+}
+
+const shot = new THREE.TetrahedronGeometry(6, 0);
+const material6 = new THREE.MeshLambertMaterial({color: 0xFFEEDD});
+const mesh6 = new THREE.Mesh(shot, material6);
+mesh6.position.x = 0;
+mesh6.position.y = -75;
+mesh6.position.z = -500;
+function shoot(intersects) {
+	scene.add(mesh6);
+	let posX = intersects["0"].point.x
+	let posY = intersects["0"].point.y
+	let posZ = intersects["0"].point.z
+	let frames = requestAnimationFrame(render)
+	let arrX = []
+	let arrY = []
+	let arrZ = []
+	let position = { x: 0, y: -75, z: -500}
+	let target = { x: posX, y: posY, z: posZ }
+	var tween = new TWEEN.Tween(mesh6.position)
+		.to(target, 150)
+		.start()
+	animate()
+}
+
+function animate() {
+	requestAnimationFrame(animate)
+	TWEEN.update()
+	renderer.render(scene, camera)
+	mesh6.position.x = 0
+	mesh6.position.y = -75
+	mesh6.position.z = -500
 }
 
 document.addEventListener( 'keyup', onSpacePress, false);
