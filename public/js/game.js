@@ -6,20 +6,24 @@ function pickRandomSphere() {
 
 function lightUpSphere() {
   pickRandomSphere()
-  for (i=0; i<arr.length; i++) {
-    setTimeout(chooseSphere, i * 1000, i)  
+  for (i=0; i < arr.length; i++) {
+    setTimeout(chooseSphere, i * 1000, i)
   }
 }
 
 function chooseSphere(i) {
   if (arr[i] === 1) {
     material1.color.setHex(0xFFFFFF);
+    getTone(-500)
   } else if (arr[i] === 2) {
     material2.color.setHex(0xFFFFFF);
+    getTone(-175)
   } else if (arr[i] === 3) {
     material3.color.setHex(0xFFFFFF);
+    getTone(175)
   } else if (arr[i] === 4) {
     material4.color.setHex(0xFFFFFF);
+    getTone(500)
   }
   setTimeout(revertBack, 800)
 }
