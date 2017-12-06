@@ -93,9 +93,9 @@ function onSpacePress(event) {
 	if (event.code == 'Space') {
 		document.addEventListener('mousemove', onMouseMove, false);
 		document.addEventListener('mousedown', onMouseDown, false);
-		// body.removeChild(startText);
+		body.removeChild(startText);
 		lightUpSphere();
-		// document.removeEventListener('keyup', onSpacePress)
+		document.removeEventListener('keyup', onSpacePress)
 	};
 };
 
@@ -120,14 +120,13 @@ function onMouseDown(event) {
 	if (intersects.length > 0) {
 		let spherePosition = intersects[0].object.position.x;
 		addSphereToArray(spherePosition);
-		// console.log(playerChoiceArr);
 		intersects[0].object.material.color.setHex(0xffffff);
 		setTimeout(getTone, 275, spherePosition);
 		setTimeout(impact, 275);
 		setTimeout(revertBack, 300);
 		shoot(intersects);
 		shotSound();
-		compareArrays();
+		setTimeout(compareArrays, 100);
 	};
 };
 
@@ -149,8 +148,19 @@ function addSphereToArray(spherePos) {
 };
 
 function compareArrays() {
-	console.log('player array: ' + playerChoiceArr);
-	console.log('random array: ' + arr);
+	for (i=0; i < playerChoiceArr.length;) {
+		if ((playerChoiceArr[i] !== arr[i]) || (playerChoiceArr.length === arr.length && playerChoiceArr[playerChoiceArr.length-1] !== arr[arr.length-1])) {
+			playerChoiceArr = [];
+			arr = [];
+			setTimeout(lightUpSphere, 1500);
+			break;
+		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length < arr.length) {
+			i++;
+		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length === arr.length) {
+			setTimeout(lightUpSphere, 1500);
+			break;
+		}
+	}
 };
 
 function shoot(intersects) {
