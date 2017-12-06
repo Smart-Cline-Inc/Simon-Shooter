@@ -78,3 +78,18 @@ function impact() {
     oscillator.stop(time + 0.15)
   }
 }
+
+function loserSound() {
+  let time = audioCtx.currentTime
+  let gainNode = audioCtx.createGain()
+  gainNode.gain.value = 0.8
+  gainNode.connect(audioCtx.destination)
+  let oscillator = audioCtx.createOscillator()
+  oscillator.connect(gainNode)
+  oscillator.type = "sawtooth"
+  oscillator.attackTime = 0.01
+  oscillator.releaseTime = 1.0
+  oscillator.frequency.value = 53
+  oscillator.start()
+  oscillator.stop(time + 1.0)
+}

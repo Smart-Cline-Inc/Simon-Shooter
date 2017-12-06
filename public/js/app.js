@@ -122,12 +122,11 @@ function onMouseDown(event) {
 		let spherePosition = intersects[0].object.position.x;
 		addSphereToArray(spherePosition);
 		intersects[0].object.material.color.setHex(0xffffff);
-		setTimeout(getTone, 275, spherePosition);
 		setTimeout(impact, 275);
 		setTimeout(revertBack, 300);
 		shoot(intersects);
 		shotSound();
-		setTimeout(compareArrays, 100);
+		compareArrays(spherePosition);
 	};
 };
 
@@ -148,16 +147,19 @@ function addSphereToArray(spherePos) {
 	};
 };
 
-function compareArrays() {
+function compareArrays(spherePosition) {
 	for (i=0; i < playerChoiceArr.length;) {
 		if ((playerChoiceArr[i] !== arr[i]) || (playerChoiceArr.length === arr.length && playerChoiceArr[playerChoiceArr.length-1] !== arr[arr.length-1])) {
 			playerChoiceArr = [];
 			arr = [];
+			setTimeout(loserSound, 275);
 			setTimeout(lightUpSphere, 1500);
 			break;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length < arr.length) {
+			setTimeout(getTone, 275, spherePosition);
 			i++;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length === arr.length) {
+			setTimeout(getTone, 275, spherePosition);
 			setTimeout(lightUpSphere, 1500);
 			break;
 		}
