@@ -178,6 +178,7 @@ function shoot(intersects) {
 		.to(target, 150)
 		.start()
 	animate();
+	setTimeout(removeShot, 150)
 };
 
 function animate() {
@@ -188,6 +189,11 @@ function animate() {
 	mesh6.position.y = -75;
 	mesh6.position.z = -500;
 };
+
+function removeShot() {
+	scene.remove(mesh6)
+}
+
 
 document.addEventListener('keyup', onSpacePress, false);
 
