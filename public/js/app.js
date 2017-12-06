@@ -1,4 +1,3 @@
-const startText = document.querySelector('div');
 const body = document.querySelector('body');
 
 const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('gameDisplay'), antialias: true});
@@ -89,9 +88,19 @@ const mouse = new THREE.Vector2();
 
 let playerChoiceArr = [];
 
+function start() {
+	document.removeEventListener('mousemove', onMouseMove);
+	document.removeEventListener('mousedown', onMouseDown);
+	let startDiv = document.createElement('div');
+	startDiv.innerText = "Press spacebar to start";
+	body.append(startDiv);
+	document.addEventListener('keyup', onSpacePress, false);
+}
+
 function onSpacePress(event) {
 	event.preventDefault();
 	if (event.code == 'Space') {
+		let startText = document.querySelector('div')
 		document.addEventListener('mousemove', onMouseMove, false);
 		document.addEventListener('mousedown', onMouseDown, false);
 		body.removeChild(startText);
@@ -153,7 +162,7 @@ function compareArrays(spherePosition) {
 			playerChoiceArr = [];
 			arr = [];
 			setTimeout(loserSound, 275);
-			setTimeout(lightUpSphere, 1500);
+			setTimeout(start, 1500);
 			break;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length < arr.length) {
 			setTimeout(getTone, 275, spherePosition);
@@ -184,7 +193,5 @@ function animate() {
 	mesh6.position.y = -75;
 	mesh6.position.z = -500;
 };
-
-document.addEventListener('keyup', onSpacePress, false);
 
 requestAnimationFrame(animate);
