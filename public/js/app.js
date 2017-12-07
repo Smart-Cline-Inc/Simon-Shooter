@@ -121,22 +121,6 @@ loader.load( 'js/ps2p.json', function ( font ) {
 	var quaternion = new THREE.Quaternion();
 	quaternion.setFromAxisAngle(axis, 0.9);
 	mesh7.position.applyQuaternion(quaternion);
-  function render() {
-		frameRate()
-    mesh7.rotation.y += 0.8;
-
-
-    // renderer.render(scene, camera);
-  }
-	render()
-	function frameRate() {
-		for (var i = 0; i < 120; i++) {
-			setTimeout(rotateTitle, (i*10+i*10))
-		}
-	}
-	function rotateTitle() {
-		mesh7.rotation.y += 0.1
-	}
 });
 
 const raycaster = new THREE.Raycaster();
