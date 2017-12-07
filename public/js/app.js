@@ -105,36 +105,38 @@ loader.load( 'js/ps2p.json', function ( font ) {
 	var simonShooter = new THREE.TextGeometry( 'Simon     Shooter', {
 		font: font,
 		size: 40,
-		height: 400,
+		height: 40,
 		curveSegments: 12
 	} );
 	const material7 = new THREE.MeshLambertMaterial({color: 0x00FF00});
 
 	const mesh7 = new THREE.Mesh(simonShooter, material7);
-	mesh7.position.x = -420;
-	mesh7.position.y = -100;
+	mesh7.position.x = -440;
+	mesh7.position.y = -150;
 	mesh7.position.z = -1300;
 	mesh7.rotation.x = -06;
 	mesh7.rotation.y = 0;
 	mesh7.rotation.z = 0;
 	scene.add(mesh7);
-	// var quaternion = new THREE.Quaternion();
-	// var title = scene.getObjectByName('SimonShooter');
-	// function render(){
-  //   quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0).normalize(), 0.005);
-  //   object.position.applyQuaternion(quaternion);
-	// 	mesh7.rotation.y += 0.01
-	// }
-	// render()
-	// function rotateTitle() {
-	// 	for (var i = 0; i < 1000; i++) {
-	// 		setTimeout(incrementRotation, (i*10+i*10))
-	// 	}
-	// }
-	// function incrementRotation() {
-	// 	mesh7.rotation.y += 0.01
-	// }
-	// rotateTitle()
+	var quaternion = new THREE.Quaternion();
+	quaternion.setFromAxisAngle(axis, 0.9);
+	mesh7.position.applyQuaternion(quaternion);
+  function render() {
+		frameRate()
+    mesh7.rotation.y += 0.8;
+
+
+    // renderer.render(scene, camera);
+  }
+	render()
+	function frameRate() {
+		for (var i = 0; i < 120; i++) {
+			setTimeout(rotateTitle, (i*10+i*10))
+		}
+	}
+	function rotateTitle() {
+		mesh7.rotation.y += 0.1
+	}
 });
 
 const raycaster = new THREE.Raycaster();
