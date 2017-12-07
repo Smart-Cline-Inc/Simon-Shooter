@@ -86,21 +86,25 @@ objects.push(mesh4);
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
+const scoreElement = document.querySelector('div');
+let score = 0;
 let playerChoiceArr = [];
 
 function start() {
 	document.removeEventListener('mousemove', onMouseMove);
 	document.removeEventListener('mousedown', onMouseDown);
-	let startDiv = document.createElement('div');
-	startDiv.innerText = "Press spacebar to start";
-	body.append(startDiv);
+	let pElement = document.createElement('p');
+	pElement.innerText = "Press spacebar to start";
+	body.append(pElement);
 	document.addEventListener('keyup', onSpacePress, false);
 }
 
 function onSpacePress(event) {
 	event.preventDefault();
 	if (event.code == 'Space') {
-		let startText = document.querySelector('div')
+		score = 0;
+		scoreElement.innerText = 'Score: ' + score;
+		let startText = document.querySelector('p')
 		document.addEventListener('mousemove', onMouseMove, false);
 		document.addEventListener('mousedown', onMouseDown, false);
 		body.removeChild(startText);
@@ -165,9 +169,13 @@ function compareArrays(spherePosition) {
 			setTimeout(start, 1500);
 			break;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length < arr.length) {
+			score += 50;
+			scoreElement.innerText = 'Score: ' + score;
 			setTimeout(getTone, 275, spherePosition);
 			i++;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length === arr.length) {
+			score += 50;
+			scoreElement.innerText = 'Score: ' + score;
 			setTimeout(getTone, 275, spherePosition);
 			setTimeout(lightUpSphere, 1500);
 			break;

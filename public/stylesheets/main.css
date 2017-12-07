@@ -12,12 +12,21 @@ canvas {
   left: 0;
 }
 
-div {
+p {
   position: absolute;
   top: 45%;
   width: 100%;
   text-align: center;
   color: white;
+  font-size: 1.5em;
+  font-family: 'Press Start 2P', cursive;
+}
+
+div {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  color: lime;
   font-size: 1.5em;
   font-family: 'Press Start 2P', cursive;
 }
