@@ -86,8 +86,10 @@ objects.push(mesh4);
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-const scoreElement = document.querySelector('div');
+const scoreElement = document.querySelector('.score');
+const roundElement = document.querySelector('.round');
 let score = 0;
+let round = 1;
 let playerChoiceArr = [];
 
 function start() {
@@ -103,7 +105,9 @@ function onSpacePress(event) {
 	event.preventDefault();
 	if (event.code == 'Space') {
 		score = 0;
+		round = 1;
 		scoreElement.innerText = 'Score: ' + score;
+		roundElement.innerText = 'Round: ' + round;
 		let startText = document.querySelector('p')
 		document.addEventListener('mousemove', onMouseMove, false);
 		document.addEventListener('mousedown', onMouseDown, false);
@@ -166,6 +170,7 @@ function compareArrays(spherePosition) {
 			playerChoiceArr = [];
 			arr = [];
 			setTimeout(loserSound, 275);
+			setTimeout(postScore, 400, score);
 			setTimeout(start, 1500);
 			break;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length < arr.length) {
@@ -175,13 +180,19 @@ function compareArrays(spherePosition) {
 			i++;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length === arr.length) {
 			score += 50;
+			round++;
 			scoreElement.innerText = 'Score: ' + score;
 			setTimeout(getTone, 275, spherePosition);
+			setTimeout(incrementRound, 1500)
 			setTimeout(lightUpSphere, 1500);
 			break;
-		}
-	}
+		};
+	};
 };
+
+function incrementRound() {
+	roundElement.innerText = 'Round: ' + round;
+}
 
 function shoot(intersects) {
 	let posX = intersects["0"].point.x;
@@ -191,6 +202,21 @@ function shoot(intersects) {
 	var tween = new TWEEN.Tween(mesh6.position)
 		.to(target, 150)
 		.start()
+};
+
+function postScore(num) {
+  var gamerName = prompt("Please enter your name to save your score!");
+  if (gamerName != null) {
+    $.ajax({
+      type: "POST",
+      url: api,
+      data: {
+        "game_name": "SimonShooter",
+        "player_name": gamerName,
+        "score": num
+      }
+    });
+  };
 };
 
 function animate() {
