@@ -165,7 +165,7 @@ function addSphereToArray(spherePos) {
 };
 
 function compareArrays(spherePosition) {
-	for (i=0; i < playerChoiceArr.length;) {
+	for (i=0; i < playerChoiceArr.length; i++) {
 		if ((playerChoiceArr[i] !== arr[i]) || (playerChoiceArr.length === arr.length && playerChoiceArr[playerChoiceArr.length-1] !== arr[arr.length-1])) {
 			playerChoiceArr = [];
 			arr = [];
@@ -173,11 +173,11 @@ function compareArrays(spherePosition) {
 			setTimeout(postScore, 400, score);
 			setTimeout(start, 1500);
 			break;
-		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length < arr.length) {
+		} else if ((i === playerChoiceArr.length-1) && (playerChoiceArr[i] === arr[i]) && playerChoiceArr.length < arr.length) {
 			score += 50;
 			scoreElement.innerText = 'Score: ' + score;
 			setTimeout(getTone, 275, spherePosition);
-			i++;
+			// i++;
 		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length === arr.length) {
 			score += 50;
 			round++;
