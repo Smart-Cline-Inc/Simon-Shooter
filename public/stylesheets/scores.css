@@ -6,18 +6,25 @@ body {
 }
 
 h1 {
-  font-size: 5vw;
+  font-size: 6vw;
+  color: #00FF00;
+  margin: 1vw 0 2vw 0;
+  text-align: center;
+}
+
+h2 {
+  font-size: 3.5vw;
   color: red;
   margin: 1vw 0 2vw 0;
 }
 
 p {
   margin-top: 0;
-  font-size:1.7vw;
+  font-size:1.4vw;
 }
 
 a {
-  font-size: 4vw;
+  font-size: 3vw;
   margin-top: 1vw;
 }
 
