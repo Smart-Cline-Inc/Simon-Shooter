@@ -112,7 +112,7 @@ function onSpacePress(event) {
 		document.addEventListener('mousemove', onMouseMove, false);
 		document.addEventListener('mousedown', onMouseDown, false);
 		body.removeChild(startText);
-		lightUpSphere();
+		lightUpSphere(round-1);
 		document.removeEventListener('keyup', onSpacePress)
 	};
 };
@@ -171,7 +171,7 @@ function compareArrays(spherePosition) {
 			arr = [];
 			setTimeout(loserSound, 275);
 			setTimeout(postScore, 400, score);
-			setTimeout(start, 1500);
+			setTimeout(start, 1200);
 			break;
 		} else if ((i === playerChoiceArr.length-1) && (playerChoiceArr[i] === arr[i]) && playerChoiceArr.length < arr.length) {
 			score += 50;
@@ -184,7 +184,7 @@ function compareArrays(spherePosition) {
 			scoreElement.innerText = 'Score: ' + score;
 			setTimeout(getTone, 275, spherePosition);
 			setTimeout(incrementRound, 1500)
-			setTimeout(lightUpSphere, 1500);
+			setTimeout(lightUpSphere, 1500, round-2);
 			break;
 		};
 	};
