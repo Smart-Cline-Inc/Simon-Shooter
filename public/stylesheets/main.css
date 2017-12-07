@@ -14,8 +14,9 @@ canvas {
 
 a {
   position: absolute;
+  width: 100%;
   bottom: 3%;
-  right: 39%;
+  text-align: center;
   color: lime;
   font-size: 1.5em;
   font-family: 'Press Start 2P', cursive;
