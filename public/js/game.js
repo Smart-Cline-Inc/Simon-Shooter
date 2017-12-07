@@ -5,14 +5,14 @@ function pickRandomSphere() {
   playerChoiceArr = []
 }
 
-function lightUpSphere() {
+function lightUpSphere(difficulty) {
   pickRandomSphere()
   for (i=0; i < arr.length; i++) {
-    setTimeout(chooseSphere, i * 1000, i)
+    setTimeout(chooseSphere, i * 1000 - difficulty * i * 75, i, difficulty)
   }
 }
 
-function chooseSphere(i) {
+function chooseSphere(i, difficulty) {
   if (arr[i] === 1) {
     material1.color.setHex(0xFFFFFF);
     getTone(-500)
@@ -26,7 +26,7 @@ function chooseSphere(i) {
     material4.color.setHex(0xFFFFFF);
     getTone(500)
   }
-  setTimeout(revertBack, 800)
+  setTimeout(revertBack, 800 - difficulty * 60)
 }
 
 function revertBack() {

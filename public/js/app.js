@@ -156,19 +156,19 @@ function start() {
 }
 
 function onSpacePress(event) {
-  event.preventDefault();
-  if (event.code == 'Space') {
-    score = 0;
-    round = 1;
-    scoreElement.innerText = 'Score: ' + score;
-    roundElement.innerText = 'Round: ' + round;
-    let startText = document.querySelector('p')
-    document.addEventListener('mousemove', onMouseMove, false);
-    document.addEventListener('mousedown', onMouseDown, false);
-    body.removeChild(startText);
-    lightUpSphere();
-    document.removeEventListener('keyup', onSpacePress)
-  };
+	event.preventDefault();
+	if (event.code == 'Space') {
+		score = 0;
+		round = 1;
+		scoreElement.innerText = 'Score: ' + score;
+		roundElement.innerText = 'Round: ' + round;
+		let startText = document.querySelector('p')
+		document.addEventListener('mousemove', onMouseMove, false);
+		document.addEventListener('mousedown', onMouseDown, false);
+		body.removeChild(startText);
+		lightUpSphere(round-1);
+		document.removeEventListener('keyup', onSpacePress)
+	};
 };
 
 function onMouseMove(event) {
@@ -219,29 +219,29 @@ function addSphereToArray(spherePos) {
 };
 
 function compareArrays(spherePosition) {
-  for (i = 0; i < playerChoiceArr.length; i++) {
-    if ((playerChoiceArr[i] !== arr[i]) || (playerChoiceArr.length === arr.length && playerChoiceArr[playerChoiceArr.length - 1] !== arr[arr.length - 1])) {
-      playerChoiceArr = [];
-      arr = [];
-      setTimeout(loserSound, 275);
-      setTimeout(postScore, 400, score);
-      setTimeout(start, 1500);
-      break;
-    } else if ((i === playerChoiceArr.length - 1) && (playerChoiceArr[i] === arr[i]) && playerChoiceArr.length < arr.length) {
-      score += 50;
-      scoreElement.innerText = 'Score: ' + score;
-      setTimeout(getTone, 275, spherePosition);
-      // i++;
-    } else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length === arr.length) {
-      score += 50;
-      round++;
-      scoreElement.innerText = 'Score: ' + score;
-      setTimeout(getTone, 275, spherePosition);
-      setTimeout(incrementRound, 1500)
-      setTimeout(lightUpSphere, 1500);
-      break;
-    };
-  };
+	for (i=0; i < playerChoiceArr.length; i++) {
+		if ((playerChoiceArr[i] !== arr[i]) || (playerChoiceArr.length === arr.length && playerChoiceArr[playerChoiceArr.length-1] !== arr[arr.length-1])) {
+			playerChoiceArr = [];
+			arr = [];
+			setTimeout(loserSound, 275);
+			setTimeout(postScore, 400, score);
+			setTimeout(start, 1200);
+			break;
+		} else if ((i === playerChoiceArr.length-1) && (playerChoiceArr[i] === arr[i]) && playerChoiceArr.length < arr.length) {
+			score += 50;
+			scoreElement.innerText = 'Score: ' + score;
+			setTimeout(getTone, 275, spherePosition);
+			// i++;
+		} else if (playerChoiceArr[i] === arr[i] && playerChoiceArr.length === arr.length) {
+			score += 50;
+			round++;
+			scoreElement.innerText = 'Score: ' + score;
+			setTimeout(getTone, 275, spherePosition);
+			setTimeout(incrementRound, 1500)
+			setTimeout(lightUpSphere, 1500, round-2);
+			break;
+		};
+	};
 };
 
 function incrementRound() {
