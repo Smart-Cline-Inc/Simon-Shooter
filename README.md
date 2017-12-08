@@ -1,6 +1,6 @@
 # Simon-Shooter
 
-!(https://drive.google.com/file/d/1AneudeAZiYUbbsRq1X1prz6CgOH6Uz51/view?usp=sharing)
+![landing page](https://drive.google.com/file/d/1AneudeAZiYUbbsRq1X1prz6CgOH6Uz51/view?usp=sharing "landing page")
 
 
 ## Link to Deployed app
