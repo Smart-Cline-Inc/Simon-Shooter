@@ -1,6 +1,7 @@
 # Simon-Shooter
+![landing page](screenshots/Simon-shooter-screenshot.png "landing page")
 
-![landing page](screenshots/scoreboard-screenshot.png "landing page")
+![scoreboard](screenshots/scoreboard-screenshot.png "scoreboard")
 
 
 ## Link to Deployed app
