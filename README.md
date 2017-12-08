@@ -1,7 +1,7 @@
 # Simon-Shooter
 
-(https://drive.google.com/open?id=1AneudeAZiYUbbsRq1X1prz6CgOH6Uz51)
-<img width="723" alt="" src="">
+!(https://drive.google.com/file/d/1AneudeAZiYUbbsRq1X1prz6CgOH6Uz51/view?usp=sharing)
+
 
 ## Link to Deployed app
   - https://simon-shooter.firebaseapp.com/
