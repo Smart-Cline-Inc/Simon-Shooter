@@ -4,21 +4,12 @@ const renderer = new THREE.WebGLRenderer({
   canvas: document.getElementById('gameDisplay'),
   antialias: true
 });
+var width = window.innerWidth
+var height = window.innerHeight
 renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(width, height);
 
-var width = window.innerWidth
-var height = window.innerWidth/16*9
-
-// renderer.setClearColor(0x000000);
-// renderer.setPixelRatio(window.devicePixelRatio);
-// renderer.setSize(width, height);
-//
-// const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 3000);
-//
-// const scene = new THREE.Scene();
-//
 window.addEventListener('resize', () => {
   var resizeWidth = window.innerWidth
   var resizeHeight = window.innerWidth/16*9
@@ -35,7 +26,7 @@ light.position.y = 50;
 light.position.z = 1000;
 scene.add(light);
 
-const light2 = new THREE.PointLight(0xffaaff, 0.5);
+const light2 = new THREE.PointLight(0xffffff, 0.5);
 light2.position.x = 500;
 light2.position.y = 50;
 light2.position.z = 1000;
@@ -93,7 +84,7 @@ mesh4.position.y = 50;
 mesh4.position.z = -1000;
 
 mesh5.position.x = 0;
-mesh5.position.y = -75;
+mesh5.position.y = -65;
 mesh5.position.z = -500;
 mesh5.rotation.x = 75;
 mesh5.rotation.y = 0;
@@ -130,9 +121,10 @@ loader.load( 'js/ps2p.json', function ( font ) {
 	mesh7.rotation.y = 0;
 	mesh7.rotation.z = 0;
 	scene.add(mesh7);
-	var quaternion = new THREE.Quaternion();
-	quaternion.setFromAxisAngle(axis, 0.9);
-	mesh7.position.applyQuaternion(quaternion);
+  
+	// var quaternion = new THREE.Quaternion();
+	// quaternion.setFromAxisAngle(axis, 0.9);
+	// mesh7.position.applyQuaternion(quaternion);
 });
 
 const raycaster = new THREE.Raycaster();
@@ -281,7 +273,7 @@ function animate() {
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
   mesh6.position.x = 0;
-  mesh6.position.y = -75;
+  mesh6.position.y = -65;
   mesh6.position.z = -500;
 };
 
