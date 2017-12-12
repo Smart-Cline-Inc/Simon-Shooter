@@ -8,6 +8,23 @@ renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+var width = window.innerWidth
+var height = window.innerWidth/16*9
+
+// renderer.setClearColor(0x000000);
+// renderer.setPixelRatio(window.devicePixelRatio);
+// renderer.setSize(width, height);
+//
+// const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 3000);
+//
+// const scene = new THREE.Scene();
+//
+window.addEventListener('resize', () => {
+  var resizeWidth = window.innerWidth
+  var resizeHeight = window.innerWidth/16*9
+  renderer.setSize(resizeWidth, resizeHeight)
+})
+
 const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 3000);
 
 const scene = new THREE.Scene();
@@ -31,7 +48,7 @@ const sphere2 = new THREE.SphereGeometry(75, 100, 100);
 const sphere3 = new THREE.SphereGeometry(75, 100, 100);
 const sphere4 = new THREE.SphereGeometry(75, 100, 100);
 const shooter = new THREE.ConeGeometry(20, 100, 3);
-const shot = new THREE.TetrahedronGeometry(6, 0);
+const shot = new THREE.TetrahedronGeometry(5, 0);
 
 const material1 = new THREE.MeshLambertMaterial({
   color: 0x00FF00
@@ -81,11 +98,6 @@ mesh5.position.z = -500;
 mesh5.rotation.x = 75;
 mesh5.rotation.y = 0;
 mesh5.rotation.z = 0;
-
-mesh6.position.x = 0;
-mesh6.position.y = -75;
-mesh6.position.z = -500;
-
 
 scene.add(mesh1);
 scene.add(mesh2);

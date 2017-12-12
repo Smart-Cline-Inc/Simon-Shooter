@@ -3,16 +3,16 @@ var frequency = 0
 
 function getTone(tone) {
   if (tone == (-500)) {
-    frequency = 100
+    frequency = 98*2
     playTone(frequency)
   } else if (tone == (-175 )) {
-    frequency = 200
+    frequency = 116.54*2
     playTone(frequency)
   } else if (tone == 175) {
-    frequency = 300
+    frequency = 146.83*2
     playTone(frequency)
   } else {
-    frequency = 400
+    frequency = 196*2
     playTone(frequency)
   }
 }
@@ -72,7 +72,7 @@ function impact() {
     oscillator.type = "sawtooth"
     oscillator.attackTime = 0.01
     oscillator.releaseTime = 0.39
-    oscillator.frequency.value = 50
+    oscillator.frequency.value = 49
     oscillator.start()
     gainNode.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
     oscillator.stop(time + 0.15)
